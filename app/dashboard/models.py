@@ -1,26 +1,26 @@
 from django.db import models
 
-class Cliente(models.Model):
+class Client(models.Model):
     class Meta:
-        db_table = 'CLIENTE'
+        db_table = 'CLIENT'
 
     id = models.AutoField(primary_key = True, db_column = 'ID')
-    nome = models.CharField(max_length = 255, db_column = 'NOME')
+    name = models.CharField(max_length = 255, db_column = 'NAME')
 
-class Modulo(models.Model):
+class Module(models.Model):
     class Meta:
-        db_table = 'MODULO'
+        db_table = 'MODULE'
 
     id = models.AutoField(primary_key = True, db_column = 'ID')
-    nome = models.CharField(max_length = 255, db_column = 'NOME')
+    name = models.CharField(max_length = 255, db_column = 'NAME')
 
 class Ticket(models.Model):
     class Meta:
         db_table = 'TICKET'
 
     id = models.AutoField(primary_key = True, db_column = 'ID')
-    titulo = models.CharField(max_length = 255, db_column = 'TITULO')
-    cliente = models.ForeignKey(Cliente, on_delete = models.CASCADE, db_column = 'CODCLIENTE')
-    modulo = models.ForeignKey(Modulo, on_delete = models.CASCADE, db_column = 'CODMODULO')
-    data_abertura = models.DateTimeField(auto_now_add = True, db_column = 'DATAABERTURA')
-    data_encerramento = models.DateTimeField(auto_now_add = True, db_column = 'DATAENCERRAMENTO')
+    title = models.CharField(max_length = 255, db_column = 'TITLE')
+    client = models.ForeignKey(Client, on_delete = models.CASCADE, db_column = 'FK_ID_CLIENT')
+    module = models.ForeignKey(Module, on_delete = models.CASCADE, db_column = 'FK_ID_MODULE')
+    opening_date = models.DateTimeField(auto_now_add = True, db_column = 'OPENING_DATE')
+    closing_date = models.DateTimeField(auto_now_add = False, null = True, db_column = 'CLOSING_DATE')
