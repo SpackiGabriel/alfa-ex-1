@@ -8,7 +8,28 @@ from dashboard.utils import count_by, group_by
 
 
 class DashboardView(APIView):
+    """
+    A view class for handling dashboard-related API requests.
+
+    This class provides the implementation for the GET and POST methods
+    to retrieve and create tickets for the dashboard.
+
+    Attributes:
+        None
+
+    Methods:
+        get(request): Retrieves tickets based on the provided month and year.
+        post(request): Creates a new ticket based on the provided data.
+    """
+
     def get(self, request):
+        """
+        Retrieves tickets based on the provided month and year.
+
+        Returns:
+            Response: The HTTP response object containing the retrieved tickets,
+            along with the count of tickets grouped by client and module.
+        """
         month = request.query_params.get('month')
         year = request.query_params.get('year')
 
@@ -41,6 +62,13 @@ class DashboardView(APIView):
         )
 
     def post(self, request):
+        """
+        Creates a new ticket based on the provided data.
+
+        Returns:
+            Response: The HTTP response object containing the created ticket,
+            along with a success message.
+        """
         serializer = TicketSerializer(data=request.data)
 
         if serializer.is_valid():
